@@ -1,0 +1,34 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local vector databases and generated indexes
+data/chroma/
+chroma/
+*.sqlite3
+*.db
+
+# Local models and generated artifacts
+models/
+*.gguf
+*.safetensors
+*.onnx
+
+# IDE and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+*.log
