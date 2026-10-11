@@ -1,122 +1,83 @@
-# ForgeAI V1
+# ForgeAI V2
 
-![ForgeAI V1](assets/forgeai-v1.png)
+![ForgeAI V2](assets/forgeai-v2.png)
 
-**A local AI-powered code assistant that helps developers understand and explore codebases.**
+**A local AI-powered code assistant with semantic retrieval and tool-calling capabilities.**
 
-ForgeAI V1 uses a local language model, embeddings, and retrieval-augmented generation (RAG) to retrieve relevant code and help answer questions about a project.
+ForgeAI V2 extends the original RAG-based code assistant with developer tools to help AI explore and understand source code.
 
 ## Features
 
-- **Local AI inference** using Ollama
-- **Semantic code search** using embeddings
-- **Retrieval-augmented generation (RAG)** with ChromaDB
-- **Code ingestion and chunking** for searching source files
-- **Python-based architecture** designed for local development
+- Local AI inference using Ollama and Qwen 2.5
+- Retrieval-Augmented Generation (RAG)
+- Semantic code search using embeddings
+- ChromaDB vector storage and retrieval
+- Code tools and tool registry
+- Modular Python architecture
 
 ## Architecture
 
 1. Read source files from a codebase.
-2. Split the source into smaller chunks.
-3. Generate embeddings for semantic retrieval.
-4. Store and retrieve relevant chunks using ChromaDB.
-5. Use the retrieved context to help answer code-related questions.
+2. Split source code into manageable chunks.
+3. Generate embeddings using `nomic-embed-text`.
+4. Store and retrieve relevant code using ChromaDB.
+5. Provide relevant context to the local Qwen model.
+6. Use available code tools to support developer workflows.
 
 ## Tech Stack
 
-- Python
+- Python 3.12
 - Ollama
 - Qwen 2.5
 - ChromaDB
-- Embeddings with `nomic-embed-text`
+- `nomic-embed-text`
 
-## Prerequisites
+## Setup
 
-- Python 3.12 recommended
-- [Ollama](https://ollama.com/) installed and running
-- Git
+Prerequisites: Python 3.12, Git, and [Ollama](https://ollama.com/).
 
-## Getting Started
-
-### 1. Clone the repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/pushpenmahawar/ForgeAI.git
 cd ForgeAI
 ```
 
-### 2. Create and activate a virtual environment
-
-macOS or Linux:
+Create a virtual environment and install dependencies:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-```
-
-### 3. Install dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
-### 4. Download the local models
+Download the required models:
 
 ```bash
 ollama pull qwen2.5:7b-instruct
-ollama pull nomic-embed-text:latest
+ollama pull nomic-embed-text
 ```
 
-Make sure the Ollama service is running before starting ForgeAI.
-
-### 5. Run ForgeAI
+Start Ollama if needed, then run ForgeAI:
 
 ```bash
+ollama serve
 python -m app.main
 ```
 
-Follow the prompts displayed by the application.
-
-## Project Structure
-
-```text
-ForgeAI/
-├── app/
-│   ├── data/
-│   │   ├── chunker.py
-│   │   ├── code_reader.py
-│   │   ├── embeddings.py
-│   │   ├── indexer.py
-│   │   ├── retriever.py
-│   │   ├── search.py
-│   │   ├── semantic_retriever.py
-│   │   └── vector_store.py
-│   └── main.py
-├── assets/
-│   └── forgeai-v1.png
-├── requirements.txt
-└── README.md
-```
+Check `app/main.py` for the actual startup flow and model configuration.
 
 ## Privacy
 
-ForgeAI is designed to use a locally running language model. Review the configured source directories and any external services before processing private code. Do not commit API keys, credentials, virtual environments, local model files, or generated databases.
+ForgeAI is designed for local development with Ollama. Keep `.env`, `.venv/`, and generated ChromaDB files out of version control.
 
-## Roadmap
+## Version History
 
-- Improve code retrieval and answer quality
-- Expand codebase exploration capabilities
-- Build a tool-calling agent
-- Add stronger validation and error handling
-
-## Version
-
-**V1 — Initial RAG-based code assistant**
-
-ForgeAI is an evolving project exploring practical applications of local LLMs and RAG for software engineering.
+- **V1:** Initial RAG-based code assistant. See the [`v1.0.0` tag](https://github.com/pushpenmahawar/ForgeAI/releases/tag/v1.0.0).
+- **V2:** Adds code tools and a tool-registry architecture.
 
 ## Author
 
-**Pushpen Mahawar**
+Pushpendra Mahawar
 
-GitHub: [@pushpenmahawar](https://github.com/pushpenmahawar)
+Repository: https://github.com/pushpenmahawar/ForgeAI
